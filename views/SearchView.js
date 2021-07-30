@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { StyleSheet, Text, View, TouchableOpacity, TouchableWithoutFeedback, Keyboard } from 'react-native';
-import CityForm from './CityForm';
-import ZipcodeForm from './ZipcodeForm';
+import CityForm from '../components/CityForm';
+import ZipcodeForm from '../components/ZipcodeForm';
 
 const SearchView = ({ handleSearch, isLoading }) => {
 
@@ -11,7 +11,17 @@ const SearchView = ({ handleSearch, isLoading }) => {
           backgroundColor: '#fff',
           marginHorizontal: 40,
           flexDirection: 'column',
-          justifyContent: 'center',
+          justifyContent: 'flex-start',
+        },
+        content: {
+          marginTop: '35%',        
+        },
+        title: {
+          fontSize: 28,
+          color: '#446ab3',
+          marginVertical: 20,
+          alignSelf: 'center',
+          fontWeight: 'bold'
         },
         toggleFormButtons: {
             flexDirection: 'row',
@@ -46,14 +56,21 @@ const SearchView = ({ handleSearch, isLoading }) => {
     
     return (
       <TouchableWithoutFeedback onPress={() => {Keyboard.dismiss()}}>
+        
         {isLoading ? (
-          <View style={styles.loadingContainer}>
+
+          <View testID='loading' style={styles.loadingContainer}>
             <Text style={styles.loading}>LOADING...</Text>
           </View>
-        ) : (
-          <View style={styles.container}>
 
-            <View style={styles.toggleFormButtons}>
+        ) : (
+
+          <View style={styles.container}>
+            <View style={styles.content}>
+
+              <Text style={styles.title}>WEATHER APP </Text>
+
+              <View style={styles.toggleFormButtons}>
 
               <TouchableOpacity style={styles.toggleButton} onPress={() => setByCity(true)}>
                 <Text style={styles.toggleButtonText}>CITY</Text>
@@ -62,31 +79,15 @@ const SearchView = ({ handleSearch, isLoading }) => {
               <TouchableOpacity style={styles.toggleButton} onPress={() => setByCity(false)}>
                 <Text style={styles.toggleButtonText}>ZIPCODE</Text>
               </TouchableOpacity>
+
+              </View>
+
+              { byCity ? (<CityForm handleSearch={handleSearch} />) : (<ZipcodeForm handleSearch={handleSearch} />) }
               
-            </View>
-
-            { byCity ? (<CityForm handleSearch={handleSearch} />) : (<ZipcodeForm handleSearch={handleSearch} />) }
-            
+            </View>    
           </View>
-        )}
-
-        {/* <View style={styles.container}>
-
-          <View style={styles.toggleFormButtons}>
-
-            <TouchableOpacity style={styles.toggleButton} onPress={() => setByCity(true)}>
-              <Text style={styles.toggleButtonText}>CITY</Text>
-            </TouchableOpacity>
-
-            <TouchableOpacity style={styles.toggleButton} onPress={() => setByCity(false)}>
-              <Text style={styles.toggleButtonText}>ZIPCODE</Text>
-            </TouchableOpacity>
-            
-          </View>
-
-          { byCity ? (<CityForm handleSearch={handleSearch} />) : (<ZipcodeForm handleSearch={handleSearch} />) }
           
-        </View> */}
+        )}
 
       </TouchableWithoutFeedback>
      );

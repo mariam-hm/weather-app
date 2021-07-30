@@ -1,22 +1,12 @@
 import React, { useState } from 'react';
-import { StyleSheet, View, Text } from 'react-native';
-import SearchView from './components/SearchView';
-import WeatherView from './components/WeatherView';
+import { StyleSheet, View } from 'react-native';
+import SearchView from './views/SearchView';
+import WeatherView from './views/WeatherView';
 import Toast from 'react-native-simple-toast';
 import { OPEN_WEATHER_API_KEY, GOOGLE_GEOCODE_API_KEY } from "@env";
 
 
 export default function App() {
-
-  const [currentWeather, setCurrentWeather] = useState({
-    description: '',
-    currTemp: null,
-    minTemp: null,
-    maxTemp: null,
-    windSpeed: null,
-    precipitation: null,
-    humidity: null
-  })
 
   const [weeklyWeather, setWeeklyWeather] = useState(null);
   const [location, setLocation] = useState(null);
@@ -37,9 +27,9 @@ export default function App() {
     const units = 'metric'
 
     if(input.city) {
-      locationUrl = `https://maps.googleapis.com/maps/api/geocode/json?address=${input.city}&key=${GOOGLE_GEOCODE_API_KEY}`
+      locationUrl = `https://maps.googleapis.com/maps/api/geocode/json?address=${input.city}&key=${GOOGLE_GEOCODE_API_KEY}`;
     } else {
-      locationUrl = `https://maps.googleapis.com/maps/api/geocode/json?address=${input.zipcode + '%20' + input.country}&key=${GOOGLE_GEOCODE_API_KEY}`
+      locationUrl = `https://maps.googleapis.com/maps/api/geocode/json?address=${input.zipcode + '%20' + input.country}&key=${GOOGLE_GEOCODE_API_KEY}`;
     }
 
     fetch(locationUrl).then(response => response.json())
@@ -50,13 +40,16 @@ export default function App() {
                   setLocation({
                     city: input.city ? (response.results[0].address_components[0].long_name) : (response.results[0].address_components[1].long_name),
                     country: response.results[0].address_components[response.results[0].address_components.length-1].long_name
-                  })
+                  });
   
-                  url = `https://api.openweathermap.org/data/2.5/onecall?lat=${response.results[0].geometry.location.lat}&lon=${response.results[0].geometry.location.lng}&exclude=minutely,hourly&units=${units}&appid=${OPEN_WEATHER_API_KEY}`
+                  url = `https://api.openweathermap.org/data/2.5/onecall?lat=${response.results[0].geometry.location.lat}&lon=${response.results[0].geometry.location.lng}&exclude=minutely,hourly&units=${units}&appid=${OPEN_WEATHER_API_KEY}`;
                   
                   return url;
+
                 } else {
+
                   return null;
+
                 }
 
               }).then(url => {
@@ -66,16 +59,18 @@ export default function App() {
                   fetch(url).then(response => response.json())
                             .then(response => {
                               if(response.daily){
-                                setWeeklyWeather(response.daily)
+                                setWeeklyWeather(response.daily);
                                 setIsLoading(false);
+
                               } else {
-                                Toast.show('Location not found')
+                                Toast.show('Location not found');
                                 setIsLoading(false);
+                                
                               }
                   })
 
                 } else {
-                  Toast.show('Location not found')
+                  Toast.show('Location not found');
                   setIsLoading(false);
                 }
 

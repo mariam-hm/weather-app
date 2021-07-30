@@ -1,7 +1,7 @@
 import React from 'react';
-import { StyleSheet, Text, View, TouchableOpacity, Image, FlatList } from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity, FlatList } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-import DayCard from './DayCard';
+import DayCard from '../components/DayCard';
 
 const WeatherView = ({ data, location, resetState }) => {
 
@@ -37,12 +37,15 @@ const WeatherView = ({ data, location, resetState }) => {
             <View>
 
                 <View style={styles.location}>
+
                     <TouchableOpacity style={styles.locationIcon} onPress={resetState} >
                         <Ionicons name="location" size={36} color="#446ab3" />
                     </TouchableOpacity>
+
                     <View>
                         <Text style={styles.locationName}>{location.city}, {location.country} </Text>
                     </View>
+                    
                 </View>
 
 

@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View, TouchableOpacity, Image } from 'react-native';
+import { StyleSheet, Text, View, Image } from 'react-native';
 import { weatherIcons } from '../styles/weatherIcons';
 import moment from 'moment';
 
@@ -42,10 +42,12 @@ const DayCard = ({ day }) => {
 
     return ( 
         <View style={styles.card}>
+        
             <Text style={styles.date}>{moment.unix(day.dt).format('ddd MMM. DD')}</Text>
             <Text style={styles.description}>{day.weather[0].main}, {day.temp.day}°</Text>
 
             <View style={styles.mainContainer}>
+
                 <View>
                     <View style={styles.image}>
                         {/* To use my own images, I took main description as key, except for codes 7xx that all take 'Fog' */}
@@ -56,9 +58,9 @@ const DayCard = ({ day }) => {
                 <View>
                     <Text style={styles.label} >Max. temp: {day.temp.max}° </Text>
                     <Text style={styles.label}>Min temp: {day.temp.min}° </Text>
-                    <Text style={styles.label}>Wind speed: {day.wind_speed} </Text>
-                    <Text style={styles.label}>Precipitation: { day.rain ? (day.rain) : ('-') } </Text> 
-                    <Text style={styles.label}>Humidity: {day.humidity} </Text>
+                    <Text style={styles.label}>Wind speed: {day.wind_speed} m/s</Text>
+                    <Text style={styles.label}>Precipitation: { day.rain ? (day.rain + 'mm') : (' -') } </Text> 
+                    <Text style={styles.label}>Humidity: {day.humidity}%</Text>
                 </View>
 
             </View>
