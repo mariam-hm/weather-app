@@ -5,8 +5,6 @@ import moment from 'moment';
 
 const DayCard = ({ day }) => {
 
-    console.log('DAY: ', day)
-
     const styles = StyleSheet.create({
         mainContainer: {
             flexDirection: 'row',

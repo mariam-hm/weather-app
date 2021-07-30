@@ -1,17 +1,15 @@
 import React from 'react';
-import { StyleSheet, Text, View, Button, TouchableOpacity, Image, FlatList } from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity, Image, FlatList } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-import { weatherIcons } from '../styles/weatherIcons';
-import moment from 'moment';
 import DayCard from './DayCard';
 
-const WeatherView = ({ data, location }) => {
+const WeatherView = ({ data, location, resetState }) => {
 
     const styles = StyleSheet.create({
         container: {
             flex: 1,
-            backgroundColor: '#eee',
-            marginHorizontal: 20,
+            backgroundColor: '#fff',
+            marginHorizontal: 10,
             flexDirection: 'column',
             justifyContent: 'flex-start',
             alignItems: 'center'
@@ -34,13 +32,12 @@ const WeatherView = ({ data, location }) => {
         }
       });
 
-    console.log(data)
     return ( 
         <View style={styles.container}>
             <View>
 
                 <View style={styles.location}>
-                    <TouchableOpacity style={styles.locationIcon}>
+                    <TouchableOpacity style={styles.locationIcon} onPress={resetState} >
                         <Ionicons name="location" size={36} color="#446ab3" />
                     </TouchableOpacity>
                     <View>
@@ -51,7 +48,7 @@ const WeatherView = ({ data, location }) => {
 
                 <FlatList 
                     style={styles.list}
-                    keyExtractor={(item) => item.dt}
+                    keyExtractor={(item) => item.dt.toString()}
                     data={data}
                     renderItem={({ item }) => (
                         <DayCard day={item} />
