@@ -8,7 +8,6 @@ const ZipcodeForm = ({ handleSearch }) => {
     const [country, setCountry] = useState('Canada');
     const [zipcode, setZipcode] = useState('');
 
-
     return ( 
         <View>
             <Picker
