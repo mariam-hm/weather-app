@@ -24,6 +24,6 @@ npm start
 
 # Screenshots
 
-![City search screen](https://github.com/mariam-hm/weather-app/screenshots/screen1.jpg "City search screen")
-![Zipcode search screen](https://github.com/mariam-hm/weather-app/screenshots/screen2.jpg "Zipcode search screen")
-![Weather screen](https://github.com/mariam-hm/weather-app/screenshots/screen3.jpg "Weather screen")
+![City search screen](https://github.com/mariam-hm/weather-app/blob/main/screenshots/screen1.jpg "City search screen")
+![Zipcode search screen](https://github.com/mariam-hm/weather-app/blob/main/screenshots/screen2.jpg "Zipcode search screen")
+![Weather screen](https://github.com/mariam-hm/weather-app/blob/main/screenshots/screen3.jpg "Weather screen")
